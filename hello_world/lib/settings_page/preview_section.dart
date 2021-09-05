@@ -7,9 +7,20 @@ class SettingsPage extends StatelessWidget {
       body: Row(
         children: [
           Expanded(flex: 3, child: Container(color: Colors.blueGrey.shade200)),
-          Expanded(flex: 2, child: Container(color: Colors.white))
+          PreviewSection()
         ],
       ),
     );
+  }
+}
+
+class PreviewSection extends StatelessWidget {
+  const PreviewSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(flex: 2, child: Container(color: Colors.white));
   }
 }
