@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
-
-class SettingsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        children: [
-          Expanded(flex: 3, child: Container(color: Colors.blueGrey.shade200)),
-          PreviewSection()
-        ],
-      ),
-    );
-  }
-}
+import 'package:hello_world/links_landing_page/links_landing_page.dart';
 
 class PreviewSection extends StatelessWidget {
   const PreviewSection({
@@ -21,6 +8,11 @@ class PreviewSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(flex: 2, child: Container(color: Colors.white));
+    return Expanded(
+      flex: 2,
+      child: Column(
+        children: [Text('Preview'), Expanded(child: LinksLandingPage())],
+      ),
+    );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'button_link.dart';
-import 'constants.dart';
+import '../constants.dart';
 import 'footer.dart';
 
 class LinksLandingPage extends StatelessWidget {

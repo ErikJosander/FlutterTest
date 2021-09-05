@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/links_landing_page.dart';
+import 'package:hello_world/links_landing_page/links_landing_page.dart';
 import 'package:hello_world/not_found_page.dart';
-import 'package:hello_world/setting_page.dart';
+import 'package:hello_world/settings_page/setting_page.dart';
 
 void main() {
   runApp(MyApp());
