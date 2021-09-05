@@ -11,7 +11,18 @@ class PreviewSection extends StatelessWidget {
     return Expanded(
       flex: 2,
       child: Column(
-        children: [Text('Preview'), Expanded(child: LinksLandingPage())],
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 28.0),
+            child: Text(
+              'Preview',
+              style: Theme.of(context).textTheme.headline3,
+            ),
+          ),
+          SizedBox(height: 20),
+          Expanded(child: LinksLandingPage()),
+          SizedBox(height: 100)
+        ],
       ),
     );
   }
