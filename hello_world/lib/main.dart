@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/links_landing_page.dart';
+import 'package:hello_world/not_found_page.dart';
 import 'package:hello_world/setting_page.dart';
 
 void main() {
@@ -20,6 +21,13 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LinksLandingPage(),
         '/settings': (context) => SettingsPage(),
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) {
+            return NotFoundPage();
+          },
+        );
       },
     );
   }

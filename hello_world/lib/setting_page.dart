@@ -7,7 +7,7 @@ class SettingsPage extends StatelessWidget {
       body: Row(
         children: [
           Expanded(flex: 3, child: Container(color: Colors.blueGrey.shade200)),
-          Expanded(flex: 1, child: Container(color: Colors.white))
+          Expanded(flex: 2, child: Container(color: Colors.white))
         ],
       ),
     );
