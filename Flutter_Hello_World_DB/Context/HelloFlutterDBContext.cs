@@ -7,9 +7,9 @@ using System.Reflection.Emit;
 
 namespace Flutter_Hello_World_DB.Context
 {
-    public class DBContext : IdentityDbContext<User>
+    public class HelloFlutterDBContext : IdentityDbContext<User>
     {
-        public DBContext(DbContextOptions<DbContext> options)
+        public HelloFlutterDBContext(DbContextOptions<DbContext> options)
         {
 
         }
