@@ -1,63 +1,110 @@
 ﻿using Flutter_Hello_World_DB.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Flutter_Hello_World_DB.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        public void Add(TEntity entity)
+        public readonly DbContext _contex;
+
+        public Repository(DbContext context)
         {
-            throw new NotImplementedException();
+            _contex = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void AddRage(IEnumerable<TEntity> entities)
+        /// <summary>
+        /// Gets the <see cref="TEntity"/> when a correct <paramref name="id"/> is supplied. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>A <typeparamref name="TEntity"/>.</returns>
+        public async Task<TEntity> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _contex.Set<TEntity>().FindAsync(id);
         }
 
+        /// <summary>
+        /// Gets the <see cref="TEntity"/> when a correct <paramref name="id"/> is supplied. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>A <typeparamref name="TEntity"/>.</returns>
+        public async Task<TEntity> GetAsync(string id)
+        {
+            return await _contex.Set<TEntity>().FindAsync(id);
+        }
+
+        /// <summary>
+        /// Gets a <see cref="IEnumerable{T}"/> of the <see cref="TEntity"/>
+        /// </summary>
+        /// <returns><see cref="IEnumerable{T}"/></returns>
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await _contex.Set<TEntity>().ToListAsync();
+        }
+
+        // Do we need this?
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _contex.Set<TEntity>().Where(expression);
         }
 
-        public Task<IEnumerable<TEntity>> GetAllAsync()
+        // <summary>
+        /// Adds a <see cref="TEntity"/> to the DB.
+        /// </summary>
+        /// <param name="entity"></param>
+        public void Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            _contex.Set<TEntity>().Add(entity);
         }
 
-        public Task<TEntity> GetAsync(int id)
+
+        /// <summary>
+        /// Adds a <see cref="IEnumerable{T}"/> of <see cref="TEntity"/> to the DB.
+        /// </summary>
+        /// <param name="entities"></param>
+        public void AddRage(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _contex.Set<IEnumerable<TEntity>>().AddRange(entities);
         }
 
-        public Task<TEntity> GetAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Removes a <see cref="TEntity"/> from the DB.
+        /// </summary>
+        /// <param name="entity"></param>
         public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            _contex.Set<TEntity>().Remove(entity);
         }
 
+
+        /// <summary>
+        /// Removes an <see cref="IEnumerable{T}"/> of <see cref="TEntity"/> from the DB.
+        /// </summary>
+        /// <param name="entities"></param>
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _contex.Set<IEnumerable<TEntity>>().RemoveRange(entities);
         }
 
+
+        /// <summary>
+        /// Saves changes made in the <see cref="DbContexts"/> to the DB.
+        /// </summary>
+        public async Task SaveAsync()
+        {
+            await _contex.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Saves changes made in the <see cref="DbContexts"/> to the DB.
+        /// </summary>
         public void Save()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task SaveAsync()
-        {
-            throw new NotImplementedException();
+            _contex.SaveChanges();
         }
     }
 }
