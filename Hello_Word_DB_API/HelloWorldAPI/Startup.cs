@@ -1,5 +1,7 @@
 using HelloWorldDB.Context;
 using HelloWorldDB.Entities;
+using HelloWorldDB.Repositories;
+using HelloWorldDB.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,11 +34,8 @@ namespace HelloWorldAPI
             // Automapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            //services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IMonsterRepository, MonsterRepository>();
-            //services.AddScoped<IOfferRepository, OfferRepository>();
-            //services.AddScoped<IProductRepository, ProductRepository>();
-            //services.AddScoped<IStoreRepository, StoreRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            
 
             // For Identity  
             services.AddIdentity<User, IdentityRole<string>>(o =>
