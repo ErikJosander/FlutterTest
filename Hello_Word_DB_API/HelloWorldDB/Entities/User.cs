@@ -33,5 +33,7 @@ namespace HelloWorldDB.Entities
 
 
         public string Role { get; set; }
+
+        public UserSetting setting { get; set; }
     }
 }

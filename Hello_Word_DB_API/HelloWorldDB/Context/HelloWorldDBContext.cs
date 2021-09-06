@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace HelloWorldDB.Context
 {
@@ -17,6 +18,12 @@ namespace HelloWorldDB.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<User>()
+            //    .HasOne(a => a.setting)
+            //    .WithOne(b => b.User)
+            //    .HasForeignKey<UserSetting>(b => b.UserRef);
+
+
             const string ADMIN_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e575";
             const string USER_ID = "a18679c0-kk60-4uty-of17-00324348eder3";
 
@@ -69,7 +76,9 @@ namespace HelloWorldDB.Context
                 SecurityStamp = string.Empty,
                 Role = "admin"
             });
-            modelBuilder.Entity<User>().HasData(new User
+
+
+            var x = new User
             {
                 Id = USER_ID,
                 Password = "123",
@@ -81,6 +90,14 @@ namespace HelloWorldDB.Context
                 PasswordHash = hasher.HashPassword(null, "123"),
                 SecurityStamp = string.Empty,
                 Role = "user"
+            };
+            modelBuilder.Entity<User>().HasData(x);
+
+            modelBuilder.Entity<UserSetting>().HasData(new UserSetting
+            {
+                User = x,
+                UserId = x.Id,
+                Links = IEnumerable<Link>()
             });
 
 
