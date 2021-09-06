@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
             style: TextButton.styleFrom(backgroundColor: Colors.amber)),
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: '/settings',
       routes: {
         '/': (context) => LinksLandingPage(),
         '/settings': (context) => SettingsPage(),
