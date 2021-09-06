@@ -2,6 +2,6 @@
 {
     public class DBString
     {
-        public static string localDbString = @"Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+        public static string localDbString = @"Server=(localdb)\mssqllocaldb;Database=HelloWorldFlutter;Trusted_Connection=True;";
     }
 }
