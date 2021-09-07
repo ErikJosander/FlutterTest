@@ -1,39 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
-
-namespace HelloWorldDB.Entities
+﻿namespace HelloWorldDB.Entities
 {
-    public class User : IdentityUser
+    public class User 
     {
-        /// <summary>
-        /// The users username.. duh
-        /// </summary>
-        [Required]
-        [MaxLength(50)]
-        public override string UserName { get; set; }
-
-
-        /// <summary>
-        /// The Email-address to the user.
-        /// </summary>
-        [Required]
-        [EmailAddress]
-        [MaxLength(50)]
-        public override string Email { get; set; }
-
-
-        /// <summary>
-        /// Password for the user
-        /// </summary>
-        [Required]
-        [PasswordPropertyText]
-        [MinLength(3), MaxLength(32)]
-        public string Password { get; set; }
-
-
-        public string Role { get; set; }
-
-        public UserSetting setting { get; set; }
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public string PassWord { get; set; }
+        public string Email { get; set; }
     }
 }
