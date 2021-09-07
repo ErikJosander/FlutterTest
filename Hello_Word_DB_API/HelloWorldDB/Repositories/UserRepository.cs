@@ -11,14 +11,19 @@ namespace HelloWorldDB.Repositories
     public class UserRepository : Repository<User>, IUserRepository
     {
         private readonly HelloWorldDBContext _context;
-
         // Constructor
         public UserRepository(HelloWorldDBContext context)
             : base(context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-
+        public bool CheckForPassWord(string username, string password)
+        {
+            var userFromRepo = _context.Users.Where(u => u.UserName == username).FirstOrDefault();
+            if (userFromRepo is null) return false;
+            if (userFromRepo.PassWord != password) return false;
+            return true; 
+        }
         public async Task<IEnumerable<User>> GetAllAsync(string userName)
         {
             if (string.IsNullOrWhiteSpace(userName))
@@ -35,10 +40,17 @@ namespace HelloWorldDB.Repositories
             }
             return collection.ToList();
         }
-
         public User GetFromUserName(string userName)
         {
             return _context.Users.Where(u => u.UserName == userName).FirstOrDefault();
+        }
+        public bool CheckForEmail(string email)
+        {
+            if(_context.Users.Any(u => u.Email == email))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

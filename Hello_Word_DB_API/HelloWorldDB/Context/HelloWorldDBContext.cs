@@ -1,6 +1,7 @@
 ﻿using HelloWorldDB.Entities;
 using HelloWorldDB.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace HelloWorldDB.Context
 {
@@ -15,6 +16,11 @@ namespace HelloWorldDB.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Link>()
+                .HasOne(p => p.User)
+                .WithMany(b => b.Links);
+
+
             // Provides all seed data
             modelBuilder.CreateDevSeedData();
 

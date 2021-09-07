@@ -23,7 +23,13 @@ namespace HelloWorldDB.Extensions
                 PassWord = "alex"
             });
 
-
+            modelBuilder.Entity<Link>().HasData(new Link
+            {
+                Id = 1,
+                Name = "Google",
+                Content = "Https://google.com",
+                UserId = 1
+            });
         }
     }
 }

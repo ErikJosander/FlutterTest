@@ -18,6 +18,38 @@ namespace HelloWorldDB.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("HelloWorldDB.Entities.Link", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Link");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "Https://google.com",
+                            Name = "Google",
+                            UserId = 1
+                        });
+                });
+
             modelBuilder.Entity("HelloWorldDB.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -53,6 +85,22 @@ namespace HelloWorldDB.Migrations
                             PassWord = "alex",
                             UserName = "Alex"
                         });
+                });
+
+            modelBuilder.Entity("HelloWorldDB.Entities.Link", b =>
+                {
+                    b.HasOne("HelloWorldDB.Entities.User", "User")
+                        .WithMany("Links")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HelloWorldDB.Entities.User", b =>
+                {
+                    b.Navigation("Links");
                 });
 #pragma warning restore 612, 618
         }

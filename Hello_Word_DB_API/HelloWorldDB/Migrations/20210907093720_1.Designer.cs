@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelloWorldDB.Migrations
 {
     [DbContext(typeof(HelloWorldDBContext))]
-    [Migration("20210907092737_1")]
+    [Migration("20210907093720_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,6 +19,38 @@ namespace HelloWorldDB.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("HelloWorldDB.Entities.Link", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Link");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "Https://google.com",
+                            Name = "Google",
+                            UserId = 1
+                        });
+                });
 
             modelBuilder.Entity("HelloWorldDB.Entities.User", b =>
                 {
@@ -55,6 +87,22 @@ namespace HelloWorldDB.Migrations
                             PassWord = "alex",
                             UserName = "Alex"
                         });
+                });
+
+            modelBuilder.Entity("HelloWorldDB.Entities.Link", b =>
+                {
+                    b.HasOne("HelloWorldDB.Entities.User", "User")
+                        .WithMany("Links")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HelloWorldDB.Entities.User", b =>
+                {
+                    b.Navigation("Links");
                 });
 #pragma warning restore 612, 618
         }

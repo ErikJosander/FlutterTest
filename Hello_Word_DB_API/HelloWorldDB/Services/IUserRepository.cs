@@ -8,5 +8,7 @@ namespace HelloWorldDB.Services
     {
         Task<IEnumerable<User>> GetAllAsync(string userName);
         User GetFromUserName(string userName);
+        bool CheckForPassWord(string username, string password);
+        bool CheckForEmail(string email);
     }
 }
