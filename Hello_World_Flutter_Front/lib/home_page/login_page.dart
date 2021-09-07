@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/home_page/login_form_buttons.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -20,6 +21,11 @@ class LoginPage extends StatelessWidget {
                   'Login',
                   style: Theme.of(context).textTheme.headline2,
                 ),
+                SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: LoginFormButtons(),
+                )
               ],
             ),
           );
