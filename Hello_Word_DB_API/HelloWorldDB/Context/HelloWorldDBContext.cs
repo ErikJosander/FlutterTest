@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace HelloWorldDB.Context
 {
@@ -12,18 +14,11 @@ namespace HelloWorldDB.Context
         {
 
         }
-
-
         public DbSet<UserSetting> UserSettings { get; set; }
+        public DbSet<Link> Links { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<User>()
-            //    .HasOne(a => a.setting)
-            //    .WithOne(b => b.User)
-            //    .HasForeignKey<UserSetting>(b => b.UserRef);
-
-
+        {          
             const string ADMIN_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e575";
             const string USER_ID = "a18679c0-kk60-4uty-of17-00324348eder3";
 
@@ -51,6 +46,12 @@ namespace HelloWorldDB.Context
                 .HasIndex(u => u.UserName)
                 .IsUnique();
 
+            //modelBuilder.Entity<Link>()
+            //    .HasOne(e => e.UserSetting)
+            //    .WithMany(c => c.Links);
+        
+                
+
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = ADMIN_ROLE_ID,
@@ -77,7 +78,6 @@ namespace HelloWorldDB.Context
                 Role = "admin"
             });
 
-
             var x = new User
             {
                 Id = USER_ID,
@@ -91,15 +91,19 @@ namespace HelloWorldDB.Context
                 SecurityStamp = string.Empty,
                 Role = "user"
             };
-            modelBuilder.Entity<User>().HasData(x);
 
-            modelBuilder.Entity<UserSetting>().HasData(new UserSetting
+
+            modelBuilder.Entity<User>(b =>
             {
-                User = x,
-                UserId = x.Id,
-                Links = IEnumerable<Link>()
+                b.HasData(x);
+                
+                b.OwnsOne(e => e.setting).HasData(new UserSetting
+                {
+                    Id = 1,
+                    UserId = x.Id,
+                    User = x,
+                });
             });
-
 
             base.OnModelCreating(modelBuilder);
         }

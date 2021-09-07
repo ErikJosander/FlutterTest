@@ -12,6 +12,5 @@ namespace HelloWorldDB.Entities
         [ForeignKey("UserSetting")]
         public int UserSettingId { get; set; }
         public UserSetting UserSetting { get; set; }
-
     }
 }
