@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/widgets/outlined_button.dart';
 
 import 'form_fill.dart';
 
@@ -28,7 +29,9 @@ class LoginPage extends StatelessWidget {
                     constraints: constraints,
                     context: context,
                     firstForm: 'Password',
-                    lastForm: 'Password')
+                    lastForm: 'Password'),
+                SizedBox(height: 50),
+                CustomButton(constraints: constraints, context: context)
               ],
             ),
           );

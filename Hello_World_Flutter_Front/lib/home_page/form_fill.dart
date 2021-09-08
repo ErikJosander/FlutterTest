@@ -16,7 +16,7 @@ class FormFill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: constraints.maxWidth * 0.8,
       height: 50,
       child: Row(
@@ -24,50 +24,49 @@ class FormFill extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Container(
-                color: Colors.red,
-                child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        bottomLeft: Radius.circular(8))),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            child: Center(
-                          child: Text(
-                            firstForm,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                        )),
-                      )),
+                      child: Center(
+                    child: Text(
+                      firstForm,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                  )),
                 )),
           ),
           Expanded(
-              flex: 6,
-              child: Container(
-                color: Colors.white,
-                child: Container(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: new LayoutBuilder(builder: (context, ct) {
-                        return Center(
-                          child: TextField(
-                            decoration: InputDecoration(
-                                hintText: lastForm,
-                                border: InputBorder.none,
-                                contentPadding:
-                                    EdgeInsets.only(bottom: ct.maxHeight / 2)),
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                        );
-                      }),
+            flex: 6,
+            child: Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: new LayoutBuilder(builder: (context, ct) {
+                  return Center(
+                    child: TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          hintText: lastForm,
+                          border: InputBorder.none,
+                          contentPadding:
+                              EdgeInsets.only(bottom: ct.maxHeight / 3)),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.subtitle1,
                     ),
-                  ),
-                ),
-              ))
+                  );
+                }),
+              ),
+            ),
+          ),
         ],
       ),
     );

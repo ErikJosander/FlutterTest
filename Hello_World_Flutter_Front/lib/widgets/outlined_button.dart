@@ -15,7 +15,13 @@ class CustomButton extends StatelessWidget {
     return Container(
       width: constraints.maxWidth * 0.4,
       height: 50,
-      color: Colors.white,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(color: Colors.black54, spreadRadius: 1),
+        ],
+      ),
       child: OutlinedButton(
         style: ButtonStyle(),
         onPressed: () => {},
