@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/front_page/second_page.dart';
 import 'package:hello_world/links_landing_page/footer.dart';
 
 class FrontPage extends StatelessWidget {
@@ -18,9 +17,8 @@ class FrontPage extends StatelessWidget {
           ElevatedButton(
             child: Text('Go to SecondPage'),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      SecondPage(data: 'Hello from frontPage')));
+              Navigator.of(context)
+                  .pushNamed('/second', arguments: 'Hello from firstpage!');
             },
           ),
           Spacer(),

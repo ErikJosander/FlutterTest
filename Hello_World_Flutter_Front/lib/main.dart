@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/front_page/front_page.dart';
 import 'package:hello_world/not_found_page.dart';
+import 'package:hello_world/route_generator.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: FrontPage(),
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
           builder: (context) {
