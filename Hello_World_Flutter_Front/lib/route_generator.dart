@@ -14,12 +14,11 @@ class RouteGenerator {
         );
       case '/second':
         // Validate of correct data type
-        if (args is String) {
-          return MaterialPageRoute(
-            builder: (_) => SecondPage(data: args),
-          );
-        }
-        return _errorRoute();
+
+        return MaterialPageRoute(
+          builder: (_) => SecondPage(),
+        );
+
       case '/settings':
         return MaterialPageRoute(
           builder: (_) => SettingsPage(),
