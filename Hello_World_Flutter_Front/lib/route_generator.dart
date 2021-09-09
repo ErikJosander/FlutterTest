@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/front_page/front_page.dart';
 import 'package:hello_world/front_page/second_page.dart';
+import 'package:hello_world/settings_page/setting_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -19,6 +20,10 @@ class RouteGenerator {
           );
         }
         return _errorRoute();
+      case '/settings':
+        return MaterialPageRoute(
+          builder: (_) => SettingsPage(),
+        );
       default:
         return _errorRoute();
     }

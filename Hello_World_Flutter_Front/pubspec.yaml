@@ -25,6 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
   url_launcher: ^6.0.10
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_test:
