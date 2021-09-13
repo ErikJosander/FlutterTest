@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/front_page/front_page.dart';
 import 'package:hello_world/front_page/second_page.dart';
+import 'package:hello_world/home_page/home_page.dart';
 import 'package:hello_world/settings_page/setting_page.dart';
 
 class RouteGenerator {
@@ -22,6 +23,11 @@ class RouteGenerator {
       case '/settings':
         return MaterialPageRoute(
           builder: (_) => SettingsPage(),
+        );
+
+      case '/login':
+        return MaterialPageRoute(
+          builder: (_) => AuthPage(),
         );
       default:
         return _errorRoute();

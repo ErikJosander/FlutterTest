@@ -23,24 +23,21 @@ class _SecondPageState extends State<SecondPage> {
       appBar: AppBar(
         title: Text('data'),
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 50,
-          ),
-          new ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return Card(
-                child: ExpansionTile(
-                  title: Text('Http Request'),
-                  children: [Text('testing')],
-                ),
-              );
-            },
-            itemCount: model.length,
-          )
-        ],
-      ),
+      body: model == null
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  child: ExpansionTile(
+                    title: Text(model[index].userId.toString()),
+                    children: [Text(model[index].userName.toString())],
+                  ),
+                );
+              },
+              itemCount: model.length,
+            ),
     );
   }
 

@@ -7,15 +7,18 @@ class FormFill extends StatelessWidget {
     required this.context,
     required this.firstForm,
     required this.lastForm,
+    required this.isHidden,
   }) : super(key: key);
 
   final BoxConstraints constraints;
   final BuildContext context;
   final String firstForm;
   final String lastForm;
+  final bool isHidden;
 
   @override
   Widget build(BuildContext context) {
+    String email;
     return Container(
       width: constraints.maxWidth * 0.8,
       height: 50,
@@ -52,8 +55,17 @@ class FormFill extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: new LayoutBuilder(builder: (context, ct) {
                   return Center(
-                    child: TextField(
-                      obscureText: true,
+                    child: TextFormField(
+                      onFieldSubmitted: (String value) {
+                        email = value;
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please provide text';
+                        }
+                        return null;
+                      },
+                      obscureText: isHidden,
                       decoration: InputDecoration(
                           hintText: lastForm,
                           border: InputBorder.none,

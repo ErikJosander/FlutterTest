@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomButton extends StatelessWidget {
-  const CustomButton({
-    Key? key,
-    required this.constraints,
-    required this.context,
-  }) : super(key: key);
+  CustomButton({Key? key, required this.constraints, required this.formKey})
+      : super(key: key);
 
   final BoxConstraints constraints;
-  final BuildContext context;
+  GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,10 @@ class CustomButton extends StatelessWidget {
       ),
       child: OutlinedButton(
         style: ButtonStyle(),
-        onPressed: () => {},
+        onPressed: () => {
+          if (formKey.currentState!.validate())
+            {print(formKey.currentContext.toString())}
+        },
         child: Text(
           'Submit',
           style: Theme.of(context).textTheme.headline6,
