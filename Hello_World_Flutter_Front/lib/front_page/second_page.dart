@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/Model/data_model.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert' as cnv;
 
 class SecondPage extends StatefulWidget {
   @override
@@ -7,6 +9,8 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
+  var model = <DataModel>[];
+
   @override
   void initState() {
     getData();
@@ -24,17 +28,17 @@ class _SecondPageState extends State<SecondPage> {
           SizedBox(
             height: 50,
           ),
-          // new ListView.builder(
-          //   itemBuilder: (BuildContext context, int index) {
-          //     return Card(
-          //       child: ExpansionTile(
-          //         title: Text('Http Request'),
-          //         children: [Text('testing')],
-          //       ),
-          //     );
-          //   },
-          //   itemCount: 1,
-          // )
+          new ListView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                child: ExpansionTile(
+                  title: Text('Http Request'),
+                  children: [Text('testing')],
+                ),
+              );
+            },
+            itemCount: model.length,
+          )
         ],
       ),
     );
@@ -43,6 +47,9 @@ class _SecondPageState extends State<SecondPage> {
   Future<void> getData() async {
     Uri url = Uri.http('localhost:5578', '/api/users');
     http.Response res = await http.get(url);
-    print(res.body);
+    List<dynamic> body = cnv.jsonDecode(res.body);
+    model = body.map((dynamic item) => DataModel.fromJson(item)).toList();
+    setState(() {});
+    print(model);
   }
 }
